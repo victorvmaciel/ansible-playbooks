@@ -1,5 +1,5 @@
 ---
-- hosts: ec2-aws
+- hosts: aws-ec2
   remote_user: root
   become: true
   vars_files:
@@ -22,12 +22,12 @@
 
     - name: Copiar a página ídice de teste
       template:
-        src: "files/index.html.j2"
+        src: "files/index.html"
         dest: "/var/www/{{ http_host }}/index.html"
 
     - name: Configurar o virtualhost no Apache
       template:
-        src: "files/apache.conf.j2"
+        src: "files/apache.conf"
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
 
     - name: Habilitar o novo site
