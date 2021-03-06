@@ -1,0 +1,6 @@
+---
+app_user: "viktor"
+http_host: "meu_dominio"
+http_conf: "meu_dominio.conf"
+http_port: "80"
+disable_default: true
