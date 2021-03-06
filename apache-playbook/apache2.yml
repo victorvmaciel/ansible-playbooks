@@ -1,0 +1,35 @@
+--- 
+- 
+  hosts: aws-ec2
+  remote_user: root
+  tasks: ~
+- 
+  apt: 
+    autoclean: true
+    pkg: 
+      - apache2
+      - python-dev
+      - build-essential
+      - python-dev
+      - python-mysqldb
+      - mysql-server
+      - mysql-client
+    state: present
+  name: "Install a list of packages"
+- 
+  enable: true
+  name: "Config Apache e MYSQL to run on start"
+  service: 
+    - apache2
+    - mysql
+  state: started
+- 
+  mysql_db: "name=testDB state=present"
+  name: "Create a test Database "
+- 
+  mysql_user: ~
+  name: viktor
+  password: wiimortal
+  priv: "*.*:ALL"
+  state: present
+
