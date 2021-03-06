@@ -1,5 +1,5 @@
 ---
-app_user: "viktor"
+app_user: "ubuntu"
 http_host: "meu_dominio"
 http_conf: "meu_dominio.conf"
 http_port: "80"
