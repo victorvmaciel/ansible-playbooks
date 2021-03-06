@@ -1,0 +1,19 @@
+---
+- hosts: aws-ec2
+  remote_user: root
+  tasks:
+    - name: "Instal Apache e o MYSQL"
+      apt: name={{ item }} state=present
+      with_items:
+         - apache2
+         - mysql-server
+         - python-mysqldb
+    - name: "Config Apache e MYSQL to run on start"
+      service: name={{ item }} state=started enable=yes
+      with_items:
+         - apache2
+         - mysql     
+    - name: "Create an user and a pass to mysql"
+      mysql_user: name=viktor
+                  password=wiimortal
+                  priv=*.*:ALL state=present    
