@@ -4,10 +4,11 @@
   become: true
   vars_files:
     - vars/default.yml
-
+# autoclean=yes para limpar o lixo no aptitude
   tasks:
+
     - name: Instalar pré-requisitos 
-      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes 
       loop: [ 'aptitude' ]
 
     - name: Instalar Apache
@@ -32,12 +33,12 @@
 
     - name: Habilitar o novo site
       shell: /usr/sbin/a2ensite {{ http_conf }}
-      notify: Reload Apache
+      notify: Restartar Apache
 
     - name: Disabilitar o site default do Apache 
       shell: /usr/sbin/a2dissite 000-default.conf
       when: disable_default
-      notify: Reload Apache
+      notify: Restartar Apache
 
     - name: "UFW - Permitir HTTP na porta {{ http_port }}"
       ufw:
